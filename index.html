@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+</head>
+<style>
+  #fox{
+    width:300px;
+    height:300px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-150px;
+    margin-top:-150px;
+    overflow:hidden;
+  }
+  #box{
+    width:1800px;
+    height:300px;
+    position:relative;
+    top:0;
+    left:0;
+  }
+  img{
+    float:left;
+    width:300px;
+    height:300px;
+  }
+  span{
+    display:block;
+    font-size:36px;
+    color:white;
+    position:absolute;
+    top:50%;
+    left:0;
+    width:50px;
+    height:50px;
+  }
+  b{
+    display:block;
+    font-size:36px;
+    height:50px;
+    color:white;
+    position:absolute;
+    top:50%;
+    right:0;
+  }
+  .was{
+    position:absolute;
+    bottom:0;
+    right:0;
+  }
+  .was li{
+    margin-right:5px;
+    float:left;
+    width:20px;
+    height:20px;
+    font-size:24px;
+    border-radius:50%;
+    background:#fff;
+    list-style:none;
+  }
+</style>
+<body>
+  <div id="fox">
+    <div id="box">
+      <img src="f1.jpg" alt="">
+      <img src="f2.jpg" alt="" />
+      <img src="f3.jpg" alt="" />
+      <img src="f4.jpg" alt="" />
+      <img src="f5.jpg" alt="" />
+      <img src="f6.jpg" alt="" />
+    </div>
+    <span><</span>
+    <b>></b>
+    <ul class="was">
+    </ul>
+  </div>
+</body>
+</html>
+<script>
+  window.onload=function(){
+    var ofox=document.getElementById('fox');
+    var obox=document.getElementById('box');
+    var oimg=document.getElementsByTagName('img');
+    var ospan=document.getElementsByTagName('span')[0];
+    var ob =document.getElementsByTagName('b')[0];
+    var oul=document.getElementsByClassName('was')[0];
+    var index=0;
+    var length=oimg.length;
+    var sos = null;
+
+  for (var i =0; i<length; i++) {
+    var oli = document.createElement('li');
+    oul.appendChild(oli);
+  }
+    var li = oul.getElementsByTagName('li');
+    function wow(){
+      for(var i=0;i<li.length;i++){
+        if(i!=index){
+          li[i].style.background="#fff";
+        }
+      }
+      li[index].style.background="#000";
+      obox.style.left= -index*300+'px'
+    }
+
+    for(var i=0;i<length;i++){
+      li[i].setAttribute("id",i)
+    }
+    //事件委托
+    oul.onclick=function(e){
+      var eve = e||window.event;
+      var target = eve.srcElement||eve.target;
+      if(target.nodeName=="LI"){
+        index=target.getAttribute("id")
+        wow()
+      }
+    }
+
+    wow()
+    function time(){
+      sos=setInterval(function(){
+        index++
+        if(index>length-1){
+          index=0
+        }
+        wow()
+      },1000)
+    }
+    time();
+    ofox.onmouseover=function(){
+      clearInterval(sos)
+    }
+     ofox.onmouseleave=function(){
+        time()
+    }
+      ob.onclick=function(){
+      index++
+      if(index>=length-1){
+        index=0
+      }
+      wow()
+  }
+   ospan.onclick=function(){
+      if(index<=0){
+        index=length-1
+      }else{
+        index--
+      }
+      wow()
+  }
+
+}
+</script>
