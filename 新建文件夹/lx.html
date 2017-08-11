@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+</head>
+<style>
+  .fox{
+    width:250px;
+    height:500px;
+    border:1px solid red;
+    position:relative;
+    left:50%;
+    margin-top:50px;
+  }
+   .fox:after{
+      display:block;
+      content:'';
+      position:absolute;
+      top:-1px;
+      right:-1px;
+      border-width:10px;
+      border-color: white white red red;
+      border-style: dashed dashed solid solid;
+    }
+
+</style>
+<body>
+  <div class="fox"></div>
+</body>
+</html>

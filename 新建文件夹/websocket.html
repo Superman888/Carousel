@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+</head>
+<style>
+  #box{
+    width:500px;
+    height:500px;
+    border:1px solid black;
+  }
+</style>
+<body>
+<div id="box"></div>
+<input type="text" id="inp">
+<button id="btn">确定</button>
+  <script>
+    var name=prompt('请输入名称');
+    var sock = new WebSocket('ws://localhost:5001');
+    sock.onopen=function(e){
+      console.log('open');
+      sock.send(JSON.stringify({
+        type: 'name',
+        data: name
+      }));
+    }
+    //传输数据内容
+    sock.onmessage=function(e){
+      // console.log('send');
+      console.log(event.data);
+
+    }
+    //关闭
+    sock.onclose=function(){
+      console.log('closed');
+    }
+
+      let inp=document.getElementById('inp');
+    let box=document.getElementById('box')
+    let btn=document.getElementById('btn');
+    btn.onclick=function(){
+      var txt =inp.value;
+      sock.send(JSON.stringify({
+        type:'message',
+        data:txt
+       }));
+
+
+      box.innerHTML += 'miss:' + inp.value + '</br>'
+    }
+  </script>
+</body>
+</html>
