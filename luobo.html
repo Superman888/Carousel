@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+
+	html,body{
+		width:100%;
+	}
+		.fox{
+			width:300px;
+			height:200px;
+			overflow:hidden;
+			position:relative;
+			left:40%;
+			top:200px;
+		}
+		.box{
+			width:1600px;
+			height:200px;
+			position:absolute;
+			left:0;
+			top:0;
+		}
+		img{
+			float:left;
+			width:300px;
+			height:200px;
+		}
+		.left,.right{
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	bottom: 100px;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	background:rgba(0,0,0,0.3);
+}
+.left{
+	left:0;
+	}
+	.right{
+		right:0;
+	}
+	</style>
+</head>
+<body>
+<div class="fox">
+	<div class="box">
+		<img src="f1.jpg">
+		<img src="f2.jpg">
+		<img src="f3.jpg">
+		<img src="f4.jpg">
+		<img src="f5.jpg">
+	</div>
+	<div class="left"><</div>
+	<div class="right">></div>
+</div>
+	<script src='jquery-1.11.3.js'></script>
+	<script>
+		$(function(){
+			 var index=0;
+			var length=$('img').length;
+			function wow(){
+				$('.box').stop().animate({left:-index*300+'px'});
+				index++
+				if(index>=length){
+					index=0;
+				}
+			}	
+			var i=0;
+			$('.left').click(function(){
+				i--
+	
+				i = length - 1;
+
+		})
+		wow()
+		setInterval(wow,1000);
+
+
+		})
+	</script>
+</body>
+</html>
